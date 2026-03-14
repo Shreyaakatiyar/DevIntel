@@ -11,7 +11,7 @@
 
   /* Background System */
   --background: #131313;
-  --surface: #111111;
+  --surface: #131313;
   --surface-elevated: #1a1a1a;
 
   /* Text */
@@ -19,7 +19,7 @@
   --text-secondary: #a1a1aa;
 
   /* Border */
-  --border: #27272a;
+  --border: #494454;
 
   /* Font Family */
   --font-display: "Inter", sans-serif;
@@ -31,19 +31,23 @@
   background-color: var(--background);
 }
 
-.color-primary {
+.background-primary {
   background-color: var(--primary);
 }
 
-.color-secondary {
+.background-secondary {
   background-color: var(--secondary);
 }
 
-.color-tertiary {
+.background-tertiary {
   background-color: var(--tertiary);
 }
 
-.color-surface {
+.color-primary {
+  color: var(--primary);
+}
+
+.surface {
   background-color: var(--surface);
 }
 
