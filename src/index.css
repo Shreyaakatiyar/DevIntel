@@ -1,1 +1,94 @@
 @import "tailwindcss";
+
+:root {
+  /* Brand Colors */
+  --primary: #3b82f6;
+  --secondary: #64748b;
+  --tertiary: #94a3b8;
+
+  /* Neutral */
+  --neutral: #020617;
+
+  /* Background System */
+  --background: #131313;
+  --surface: #111111;
+  --surface-elevated: #1a1a1a;
+
+  /* Text */
+  --text-primary: #e5e2e1;
+  --text-secondary: #a1a1aa;
+
+  /* Border */
+  --border: #27272a;
+
+  /* Font Family */
+  --font-display: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
+}
+
+.background {
+  background-color: var(--background);
+}
+
+.color-primary {
+  background-color: var(--primary);
+}
+
+.color-secondary {
+  background-color: var(--secondary);
+}
+
+.color-tertiary {
+  background-color: var(--tertiary);
+}
+
+.color-surface {
+  background-color: var(--surface);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.border-default {
+  border-color: var(--border);
+}
+
+.display{
+  font-family: var(--font-display);
+}
+
+.heading {
+  font-family: var(--font-display);
+}
+
+.body{
+  font-family: var(--font-body);
+}
+
+.label {
+  font-family: var(--font-label);
+}
+
+.glass {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.obsidian-gradient {
+  background: linear-gradient(135deg, #d0bcff 0%, #a078ff 100%);
+}
+
+.ambient-glow {
+  box-shadow: 0 0 60px -15px rgba(208, 188, 255, 0.08);
+}
+
+.circuit-pattern {
+  background-image: radial-gradient(circle at 2px 2px, #353534 1px, transparent 0);
+  background-size: 40px 40px;
+}
