@@ -12,6 +12,7 @@ const Searchbar = () => {
       if (!username.trim()) return;
 
       navigate(`/dashboard/${username}`);
+      setUsername("");
     };
 
   return (
