@@ -8,7 +8,7 @@ const Navbar = () => {
                 <div className='w-11 h-11 rounded-lg flex items-center justify-center'>
                     <span><img src="./src/assets/Logo.svg" alt="Logo"/></span>
                 </div>
-                <span className='text-2xl font-headline font-bold tracking-tight bg-linear-to-r from-[#3b82f6] to-[#efeef2] bg-clip-text text-transparent'>DevIntel</span>
+                <span className='text-2xl font-headline font-bold tracking-tight text-primary'>DevIntel</span>
             </div>
         </nav>
     </>
