@@ -16,10 +16,10 @@
 
   /* Text */
   --text-primary: #e5e2e1;
-  --text-secondary: #a1a1aa;
+  --text-secondary: #cbc3d7;
 
   /* Border */
-  --border: #494454;
+  --border: #958ea0;
 
   /* Font Family */
   --font-display: "Inter", sans-serif;
@@ -85,7 +85,7 @@
 }
 
 .obsidian-gradient {
-  background: linear-gradient(135deg, #d0bcff 0%, #a078ff 100%);
+  background: linear-gradient(135deg, #a1bfee 0%, #3b82f6 100%);
 }
 
 .ambient-glow {
