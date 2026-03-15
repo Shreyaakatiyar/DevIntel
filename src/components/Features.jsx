@@ -21,8 +21,8 @@ const Features = () => {
                         Get deep technical analysis beyond the stars. Our neural engine parses commit messages, PR quality, and architectural patterns to score engineering maturity.
                     </p>
                     <div className='flex gap-2 mt-6'>
-                        <span className='px-3 py-1 bg-[#3b82f6]/10 border border-default text-[#60a5fa] text-xs rounded-full'>Semantic Analysis</span>
-                        <span className='px-3 py-1 bg-[#3b82f6]/10 border border-default text-[#60a5fa] text-xs rounded-full'>Code Quality Score</span>
+                        <span className='px-3 py-1 bg-[#2d2d2d] border border-default text-secondary text-xs rounded-full'>Semantic Analysis</span>
+                        <span className='px-3 py-1 bg-[#2d2d2d] border border-default text-secondary text-xs rounded-full'>Code Quality Score</span>
                     </div>
                 </div>
             </div>
@@ -38,11 +38,11 @@ const Features = () => {
                     </div>
                     <div className='space-y-4 mt-auto'>
                         <div>
-                            <p className='text-[#3b82f6] text-2xl font-bold'>1M+</p>
+                            <p className='text-[#669ef9] text-2xl font-bold'>1M+</p>
                             <p className='text-gray-400 text-xs uppercase tracking-wider'>Profiles Indexed</p>
                         </div>
                         <div>
-                            <p className='text-[#3b82f6] text-2xl font-bold'>98.4%</p>
+                            <p className='text-[#669ef9] text-2xl font-bold'>98.4%</p>
                             <p className='text-gray-400 text-xs uppercase tracking-wider'>Prediction Accuracy</p>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ const Features = () => {
                     </p>
                     <div className='grid grid-cols-4 gap-2'>
                         {[...Array(12)].map((_, i) => (
-                            <div key={i} className={`h-6 rounded ${i % 3 === 0 ? 'bg-[#3b82f6]' : i % 3 === 1 ? 'bg-[#3b82f6]/60' : 'bg-[#3b82f6]/30'}`}></div>
+                            <div key={i} className={`h-6 rounded ${i % 3 === 0 ? 'bg-[#393939]' : i % 3 === 1 ? 'bg-[#393939]/60' : 'bg-[#393939]/30'}`}></div>
                         ))}
                     </div>
                 </div>
@@ -85,19 +85,19 @@ const Features = () => {
                         <div>
                             <div className='flex justify-between items-center mb-2'>
                                 <span className='text-gray-300 text-xs font-medium'>Rust Performance</span>
-                                <span className='text-[#3b82f6] text-xs font-semibold'>Top 2%</span>
+                                <span className='text-[#669ef9] text-xs font-semibold'>Top 2%</span>
                             </div>
                             <div className='w-full h-2 bg-gray-700 rounded-full overflow-hidden'>
-                                <div className='h-full w-[95%] bg-linear-to-r from-[#3b82f6] to-[#60a5fa]'></div>
+                                <div className='h-full w-[95%] bg-linear-to-r from-[#669ef9] to-[#60a5fa]'></div>
                             </div>
                         </div>
                         <div>
                             <div className='flex justify-between items-center mb-2'>
                                 <span className='text-gray-300 text-xs font-medium'>System Architecture</span>
-                                <span className='text-[#3b82f6] text-xs font-semibold'>Top 8%</span>
+                                <span className='text-[#669ef9] text-xs font-semibold'>Top 8%</span>
                             </div>
                             <div className='w-full h-2 bg-gray-700 rounded-full overflow-hidden'>
-                                <div className='h-full w-[85%] bg-linear-to-r from-[#3b82f6] to-[#60a5fa]'></div>
+                                <div className='h-full w-[85%] bg-linear-to-r from-[#669ef9] to-[#60a5fa]'></div>
                             </div>
                         </div>
                     </div>
