@@ -38,11 +38,11 @@ const Features = () => {
                     </div>
                     <div className='space-y-4 mt-auto'>
                         <div>
-                            <p className='text-[#669ef9] text-2xl font-bold'>1M+</p>
+                            <p className='text-[#a2c3f9] text-2xl font-bold'>1M+</p>
                             <p className='text-gray-400 text-xs uppercase tracking-wider'>Profiles Indexed</p>
                         </div>
                         <div>
-                            <p className='text-[#669ef9] text-2xl font-bold'>98.4%</p>
+                            <p className='text-[#a2c3f9] text-2xl font-bold'>98.4%</p>
                             <p className='text-gray-400 text-xs uppercase tracking-wider'>Prediction Accuracy</p>
                         </div>
                     </div>
