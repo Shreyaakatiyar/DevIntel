@@ -96,3 +96,32 @@
   background-image: radial-gradient(circle at 2px 2px, #353534 1px, transparent 0);
   background-size: 40px 40px;
 }
+
+/* Scale up the entire heatmap SVG */
+.heatmap-wrapper .react-calendar-heatmap {
+  width: 100%;
+  height: 160px;
+}
+
+/* Make each square smaller with visible gaps */
+.heatmap-wrapper .react-calendar-heatmap rect:not([width="10"]) {
+  width: 11px !important;
+  height: 11px !important;
+  rx: 3px;
+}
+
+/* Colors matching your blue theme */
+.react-calendar-heatmap rect {
+  fill: #2a2a2a;
+}
+
+.react-calendar-heatmap .color-empty { fill: #2a2a2a; }
+.react-calendar-heatmap .color-scale-1 { fill: rgba(59, 130, 246, 0.25); }
+.react-calendar-heatmap .color-scale-2 { fill: rgba(59, 130, 246, 0.50); }
+.react-calendar-heatmap .color-scale-3 { fill: rgba(59, 130, 246, 0.75); }
+.react-calendar-heatmap .color-scale-4 { fill: rgba(59, 130, 246, 1); }
+
+.react-calendar-heatmap text {
+  fill: #4b5563;
+  font-size: 9px;
+}
