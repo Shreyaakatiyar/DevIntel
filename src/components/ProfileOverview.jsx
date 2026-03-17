@@ -24,7 +24,7 @@ const ProfileOverview = ({profile, repos, contributions, heatmapData, selectedYe
 
   return (
     <>
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-8">
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-8 ">
         {/* Profile Overview card */}
         <div className="lg:col-span-2 bg-[#202020] rounded-xl p-8 relative overflow-hidden border border-white/5">
           <div className="flex flex-col md:flex-row items-start gap-8 relative z-10">
@@ -199,6 +199,8 @@ const ProfileOverview = ({profile, repos, contributions, heatmapData, selectedYe
           contributions={contributions}
           selectedYear={selectedYear}
           setSelectedYear={setSelectedYear}
+          repos={repos}
+          profile={profile}
         />
       </section>
     </>

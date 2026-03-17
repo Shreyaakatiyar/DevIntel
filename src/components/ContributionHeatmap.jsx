@@ -3,9 +3,16 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 
-const ContributionHeatmap = ({ heatmapData, contributions, selectedYear, setSelectedYear, repos }) => {
+const ContributionHeatmap = ({ heatmapData, contributions, selectedYear, setSelectedYear, repos, profile }) => {
   const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
+
+  const joinYear = profile?.created_at
+    ? new Date(profile.created_at).getFullYear()
+    : currentYear - 4;
+  const years = Array.from(
+    { length: currentYear - joinYear + 1 },
+    (_, i) => currentYear - i
+  );
 
   // Max streak
   let maxStreak = 0;
@@ -34,27 +41,18 @@ const ContributionHeatmap = ({ heatmapData, contributions, selectedYear, setSele
     monthlyData[month].contributions += day.count;
   });
 
-  // Repo timeline
-  const reposByYear = {};
-  repos?.forEach(repo => {
-    const year = new Date(repo.created_at).getFullYear();
-    if (!reposByYear[year]) reposByYear[year] = { year, count: 0 };
-    reposByYear[year].count++;
-  });
-  const timelineData = Object.values(reposByYear).sort((a, b) => a.year - b.year);
-  const mostActiveRepoYear = [...timelineData].sort((a, b) => b.count - a.count)[0];
-
   return (
     <div className="bg-[#1b1b1b] rounded-xl p-8 col-span-2 flex flex-col gap-8">
       {/* Header */}
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-bold text-white">Contribution Heatmap</h3>
-        <div className="flex gap-2">
+        {/* Year selector — scrollable for long-time users */}
+        <div className="flex gap-2 overflow-x-auto pb-1 max-w-100 scrollbar-hide">
           {years.map((year) => (
             <button
               key={year}
               onClick={() => setSelectedYear(year)}
-              className={`px-3 py-1 rounded-lg text-sm transition cursor-pointer ${
+              className={`px-3 py-1 rounded-lg text-sm transition cursor-pointer flex-shrink-0 ${
                 selectedYear === year
                   ? "bg-[#3b82f6] text-white"
                   : "bg-[#252525] text-gray-400 hover:bg-[#2f2f2f]"
