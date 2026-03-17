@@ -83,10 +83,11 @@ const ProfileOverview = ({profile, repos, contributions, heatmapData, selectedYe
                     View GitHub
                   </button>
                 </a>
-
-                <button className="px-4 py-2 bg-white/5 text-gray-300 rounded-lg text-sm hover:bg-white/20 transition cursor-pointer">
-                  Compare
-                </button>
+                <a href="/compare">
+                    <button className="px-4 py-2 bg-white/5 text-gray-300 rounded-lg text-sm hover:bg-white/20 transition cursor-pointer">
+                        Compare
+                    </button>
+                </a>
               </div>
             </div>
           </div>
