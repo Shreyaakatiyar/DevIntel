@@ -5,6 +5,7 @@ import { RiGitRepositoryFill,RiStarSFill } from "react-icons/ri";
 import { FaCodeFork, FaBusinessTime} from "react-icons/fa6";
 import LanguageChart from './LanguageChart';
 import ContributionHeatmap from './ContributionHeatmap'
+import AIInsights from './AIInsights'
 
 const ProfileOverview = ({profile, repos, contributions, heatmapData, selectedYear, setSelectedYear}) => {
     // total stars 
@@ -94,44 +95,8 @@ const ProfileOverview = ({profile, repos, contributions, heatmapData, selectedYe
         </div>
 
         {/* AI Insights Card  */}
-        <div className="bg-[#202020] rounded-xl p-6 relative overflow-hidden group">
-          <div className="absolute bg-[#1b1b1b]"></div>
-          <div className="flex items-center gap-2 mb-6">
-            <span className="text-primary">
-              {" "}
-              <BsStars className="text-[#3b82f6]/70" />{" "}
-            </span>
-            <h3 class="text-sm font-bold uppercase tracking-widest text-primary">
-              AI Insights
-            </h3>
-          </div>
-          <div className="space-y-4">
-            <div className="p-4 rounded-xl bg-[#313131] ">
-              <p className="text-xs text-[#3b82f6]/80 font-medium mb-1 uppercase">
-                Primary focus
-              </p>
-              <p className="text-on-surface text-sm font-medium">
-                Cloud Infrastructure &amp; High-Performance Computing
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-[#313131] ghost-border">
-              <p className="text-xs text-[#3b82f6]/80 font-medium mb-1 uppercase">
-                Core Proficiency
-              </p>
-              <p className="text-on-surface text-sm font-medium">
-                Strong architectural patterns in Go and Rust
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-[#313131] ghost-border">
-              <p className="text-xs text-[#3b82f6]/80 font-medium mb-1 uppercase">
-                Contribution Style
-              </p>
-              <p className="text-on-surface text-sm font-medium">
-                Consistency leads to 99th percentile reliability score.
-              </p>
-            </div>
-          </div>
-        </div>
+
+        <AIInsights profile={profile} repos={repos} />
       </section>
 
       {/* Stats Grid */}

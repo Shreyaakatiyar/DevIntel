@@ -52,7 +52,7 @@ const ContributionHeatmap = ({ heatmapData, contributions, selectedYear, setSele
             <button
               key={year}
               onClick={() => setSelectedYear(year)}
-              className={`px-3 py-1 rounded-lg text-sm transition cursor-pointer flex-shrink-0 ${
+              className={`px-3 py-1 rounded-lg text-sm transition cursor-pointer shrink-0 ${
                 selectedYear === year
                   ? "bg-[#3b82f6] text-white"
                   : "bg-[#252525] text-gray-400 hover:bg-[#2f2f2f]"
