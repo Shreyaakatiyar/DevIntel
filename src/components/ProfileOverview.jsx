@@ -7,7 +7,7 @@ import LanguageChart from './LanguageChart';
 import ContributionHeatmap from './ContributionHeatmap'
 import AIInsights from './AIInsights'
 
-const ProfileOverview = ({profile, repos, contributions, heatmapData, selectedYear, setSelectedYear}) => {
+const ProfileOverview = ({profile, repos, contributions, heatmapData, selectedYear, setSelectedYear, setActiveSection}) => {
     // total stars 
     const totalStars = repos.reduce(
       (sum, repo) => sum + repo.stargazers_count,
@@ -84,11 +84,12 @@ const ProfileOverview = ({profile, repos, contributions, heatmapData, selectedYe
                     View GitHub
                   </button>
                 </a>
-                <a href="/compare">
-                    <button className="px-4 py-2 bg-white/5 text-gray-300 rounded-lg text-sm hover:bg-white/20 transition cursor-pointer">
-                        Compare
-                    </button>
-                </a>
+                <button
+                  onClick={() => setActiveSection("compare")}
+                  className="px-4 py-2 bg-white/5 text-gray-300 rounded-lg text-sm hover:bg-white/20 transition cursor-pointer"
+                >
+                  Compare
+                </button>
               </div>
             </div>
           </div>

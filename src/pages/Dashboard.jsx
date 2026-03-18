@@ -2,6 +2,9 @@ import React from 'react'
 import SideNavbar from '../components/SideNavbar'
 import TopNavbar from '../components/TopNavbar'
 import ProfileOverview from '../components/ProfileOverview'
+import RepoExplorer from '../components/RepoExplorer'
+import CompareDevelopers from '../components/CompareDevelopers'
+import InsightsDashboard from '../components/InsightsDashboard'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
@@ -9,6 +12,7 @@ import axios from 'axios'
 const Dashboard = () => {
     const { username } = useParams();
     const currentYear = new Date().getFullYear();
+    const [activeSection, setActiveSection] = useState("dashboard")
     const [selectedYear, setSelectedYear] = useState(currentYear);
     const [contributions, setContributions] = useState(0);
     const [heatmapData, setHeatmapData] = useState([]);
@@ -78,6 +82,48 @@ const Dashboard = () => {
       };
       fetchData();
     }, [username]);
+
+
+    useEffect(() => {
+      setActiveSection("dashboard");
+    }, [username]);
+
+
+    const renderContent = () => {
+      if (!profile) return null;
+      switch (activeSection) {
+        case "repositories":
+          return <RepoExplorer repos={repos} />;
+        case "insights":
+          return (
+            <div className="p-8">
+              <h2 className="text-2xl font-bold text-white mb-2">
+                AI Insights
+              </h2>
+              <p className="text-gray-400 text-sm mb-8">
+                AI-powered analysis for @{profile.login}
+              </p>
+              <div className="max-w-lg">
+                <InsightsDashboard profile={profile} repos={repos} />
+              </div>
+            </div>
+          );
+        case "compare":
+          return <CompareDevelopers profile={profile} repos={repos} />;
+        default:
+          return (
+            <ProfileOverview
+              profile={profile}
+              repos={repos}
+              contributions={contributions}
+              heatmapData={heatmapData}
+              selectedYear={selectedYear}
+              setSelectedYear={setSelectedYear}
+              setActiveSection={setActiveSection}
+            />
+          );
+      }
+    };
 
     // Error state
     if (error) {
@@ -151,18 +197,14 @@ const Dashboard = () => {
     }
 
     return (
-      <div className="flex min-h-screen scrollbar-hide">
-        <SideNavbar />
-        <main className="flex-1 flex flex-col">
+      <div className="flex min-h-screen">
+        <SideNavbar
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+        />
+        <main className="ml-64 flex-1 flex flex-col">
           <TopNavbar />
-          <ProfileOverview
-            profile={profile}
-            repos={repos}
-            contributions={contributions}
-            heatmapData={heatmapData}
-            selectedYear={selectedYear}
-            setSelectedYear={setSelectedYear}
-          />
+          {renderContent()}
         </main>
       </div>
     );

@@ -77,7 +77,8 @@ Return ONLY a JSON array with exactly 3 objects, no extra text, no markdown:
       const data = await response.json();
 
       if (data.error) {
-        setError(`API Error: ${data.error.message}`);
+        //`API Error: ${data.error.message}
+        setError(`Error loading AI Insights`);
         return;
       }
 

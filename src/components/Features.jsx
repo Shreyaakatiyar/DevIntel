@@ -170,7 +170,7 @@ const Features = () => {
                       whileInView={{ width: item.value }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.8, delay: 0.2 + i * 0.15, ease: "easeOut" }}
-                      className='h-full bg-gradient-to-r from-[#669ef9] to-[#60a5fa] rounded-full'
+                      className='h-full bg-linear-to-r from-[#669ef9] to-[#60a5fa] rounded-full'
                     />
                   </div>
                 </div>
