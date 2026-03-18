@@ -101,9 +101,9 @@ const Dashboard = () => {
                 AI Insights
               </h2>
               <p className="text-gray-400 text-sm mb-8">
-                AI-powered analysis for @{profile.login}
+                AI-generated analysis of @{profile.login}'s GitHub activity, technology stack, and repository trends.
               </p>
-              <div className="max-w-lg">
+              <div>
                 <InsightsDashboard profile={profile} repos={repos} />
               </div>
             </div>
@@ -202,7 +202,7 @@ const Dashboard = () => {
           activeSection={activeSection}
           setActiveSection={setActiveSection}
         />
-        <main className="ml-64 flex-1 flex flex-col">
+        <main className="ml-64 flex-1 flex flex-col min-h-screen">
           <TopNavbar />
           {renderContent()}
         </main>
