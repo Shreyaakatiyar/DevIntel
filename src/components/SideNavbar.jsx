@@ -39,7 +39,7 @@ const SideNavbar = ({ activeSection, setActiveSection }) => {
                 : "text-gray-400 hover:text-white hover:bg-white/5"
             }`}
           >
-            <Icon className="text-lg flex-shrink-0" />
+            <Icon className="text-lg xshrink-0" />
             {label}
           </button>
         ))}

@@ -24,11 +24,12 @@ const RepoExplorer = ({repos}) => {
               <h3 className="text-white font-medium group-hover:text-[#3b82f6] transition-colors">
                 {repo.name}
               </h3>
-                <a>
+                <a
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-white transition-colors"
+                >
                 <FiExternalLink />
               </a>
             </div>
