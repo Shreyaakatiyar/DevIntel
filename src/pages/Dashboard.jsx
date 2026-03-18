@@ -19,6 +19,8 @@ const Dashboard = () => {
     const [profile, setProfile] = useState(null);
     const [repos, setRepos] = useState([]);
     const [error, setError] = useState(null);
+    const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
+
 
     const fetchContributions = async (username, year) => {
       const from = `${year}-01-01T00:00:00Z`;
@@ -130,7 +132,7 @@ const Dashboard = () => {
       return (
         <div className="flex min-h-screen">
           <SideNavbar />
-          <main className="ml-64 flex-1 flex flex-col">
+          <main className="lg:ml-64 flex-1 flex flex-col">
             {/* Spacer for mobile top bar */}
             <div className="block md:hidden h-14" />
             <TopNavbar />
@@ -203,10 +205,20 @@ const Dashboard = () => {
         <SideNavbar
           activeSection={activeSection}
           setActiveSection={setActiveSection}
+          onSearchOpen={() => setMobileSearchOpen(true)}
         />
-        <main className="ml-64 flex-1 flex flex-col min-h-screen">
-          <TopNavbar />
-          {renderContent()}
+        <main className="lg:ml-64 flex-1 flex flex-col min-h-screen">
+          {/* Spacer for mobile top bar */}
+          <div className="block lg:hidden h-14" />
+          <div className="relative">
+            <TopNavbar
+              showMobileSearch={mobileSearchOpen}
+              onCloseMobileSearch={() => setMobileSearchOpen(false)}
+            />
+          </div>
+          <div className="flex-1 flex flex-col overflow-auto">
+            {renderContent()}
+          </div>
         </main>
       </div>
     );
