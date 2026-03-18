@@ -197,7 +197,7 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
           <div className="bg-[#1b1b1b] border border-white/5 rounded-xl p-5">
             <div className="flex items-start justify-between">
               <div className="flex items-start gap-3 flex-1">
-                <div className="w-8 h-8 bg-[#3b82f6]/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-8 h-8 bg-[#3b82f6]/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
                   <BsStars className="text-[#3b82f6]" />
                 </div>
                 <div className="flex-1">
@@ -384,7 +384,7 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
                             <p className="text-gray-500 text-xs truncate mt-0.5">{repo.description}</p>
                           )}
                         </div>
-                        <div className="flex items-center gap-3 ml-3 flex-shrink-0">
+                        <div className="flex items-center gap-3 ml-3 shrink-0">
                           {repo.language && (
                             <span className="text-xs text-gray-500 bg-white/5 px-2 py-0.5 rounded">{repo.language}</span>
                           )}

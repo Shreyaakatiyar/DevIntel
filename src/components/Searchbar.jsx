@@ -18,7 +18,7 @@ const Searchbar = () => {
 
       {/* Desktop version — all in one row */}
       <div className="hidden sm:flex items-center bg-[#0f0f13] border border-white/10 rounded-xl px-4 py-4 shadow-lg">
-        <IoSearch className="text-gray-400 text-xl ml-2 flex-shrink-0" />
+        <IoSearch className="text-gray-400 text-xl ml-2 shrink-0" />
         <input
           type="text"
           placeholder="Enter GitHub username (e.g., torvalds)..."
@@ -29,7 +29,7 @@ const Searchbar = () => {
         />
         <button
           onClick={handleSearch}
-          className="px-6 py-3 rounded-full font-semibold text-black bg-gradient-to-r from-[#efeef2] to-[#3b82f6] hover:opacity-90 transition shadow-lg cursor-pointer flex-shrink-0"
+          className="px-6 py-3 rounded-full font-semibold text-black bg-linear-to-r from-[#efeef2] to-[#3b82f6] hover:opacity-90 transition shadow-lg cursor-pointer shrink-0"
         >
           Analyze Profile
         </button>
@@ -38,7 +38,7 @@ const Searchbar = () => {
       {/* Mobile version — stacked */}
       <div className="flex sm:hidden flex-col gap-3">
         <div className="flex items-center bg-[#0f0f13] border border-white/10 rounded-xl px-4 py-3 shadow-lg">
-          <IoSearch className="text-gray-400 text-lg flex-shrink-0" />
+          <IoSearch className="text-gray-400 text-lg shrink-0" />
           <input
             type="text"
             placeholder="Enter GitHub username..."
@@ -50,7 +50,7 @@ const Searchbar = () => {
         </div>
         <button
           onClick={handleSearch}
-          className="w-full py-3.5 rounded-xl font-semibold text-black bg-gradient-to-r from-[#efeef2] to-[#3b82f6] hover:opacity-90 transition shadow-lg cursor-pointer text-sm"
+          className="w-full py-3.5 rounded-xl font-semibold text-black bg-linear-to-r from-[#efeef2] to-[#3b82f6] hover:opacity-90 transition shadow-lg cursor-pointer text-sm"
         >
           Analyze Profile
         </button>

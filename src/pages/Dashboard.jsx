@@ -131,6 +131,8 @@ const Dashboard = () => {
         <div className="flex min-h-screen">
           <SideNavbar />
           <main className="ml-64 flex-1 flex flex-col">
+            {/* Spacer for mobile top bar */}
+            <div className="block md:hidden h-14" />
             <TopNavbar />
             <div className="flex flex-col items-center justify-center flex-1 gap-6 p-10">
               <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center">

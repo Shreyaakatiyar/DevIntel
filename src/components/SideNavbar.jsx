@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RiDashboardLine, RiGitRepositoryLine } from "react-icons/ri"
 import { BsStars } from "react-icons/bs"
 import { MdOutlineCompare } from "react-icons/md"
+import { HiMenuAlt2 } from "react-icons/hi"
+import { MdClose } from "react-icons/md"
 import { useNavigate } from 'react-router-dom'
 import Logo from "../assets/logo.svg"
 
@@ -14,38 +16,111 @@ const navItems = [
 
 const SideNavbar = ({ activeSection, setActiveSection }) => {
   const navigate = useNavigate()
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  const handleNavClick = (id) => {
+    setActiveSection(id)
+    setMobileOpen(false)
+  }
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-[#111111] border-r border-white/5 flex flex-col p-6">
+    <>
+      {/* ── Desktop sidebar ── */}
+      <aside className="hidden md:flex fixed left-0 top-0 h-screen w-64 bg-[#111111] border-r border-white/5 flex-col p-6 z-40">
+        <div
+          className="flex items-center gap-3 mb-10 cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          <img src={Logo} alt="DevIntel" className="w-7 h-7" />
+          <span className="text-white font-semibold text-lg">DevIntel</span>
+        </div>
 
-      {/* Logo */}
-      <div
-        className="flex items-center gap-3 mb-10 cursor-pointer"
-        onClick={() => navigate("/")}
-      >
-        <img src={Logo} alt="DevIntel" className="w-7 h-7" />
-        <span className="text-white font-semibold text-lg">DevIntel</span>
+        <nav className="flex flex-col gap-1">
+          {navItems.map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              onClick={() => handleNavClick(id)}
+              className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer text-left w-full ${
+                activeSection === id
+                  ? "bg-[#3b82f6]/10 text-[#3b82f6]"
+                  : "text-gray-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <Icon className="text-lg shrink-0" />
+              {label}
+            </button>
+          ))}
+        </nav>
+      </aside>
+
+      {/* ── Mobile top bar ── */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 bg-[#111111] border-b border-white/5">
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          <img src={Logo} alt="DevIntel" className="w-6 h-6" />
+          <span className="text-white font-semibold">DevIntel</span>
+        </div>
+
+        <button
+          onClick={() => setMobileOpen(true)}
+          className="text-gray-400 hover:text-white transition p-1"
+        >
+          <HiMenuAlt2 className="text-2xl" />
+        </button>
       </div>
 
-      {/* Nav items */}
-      <nav className="flex flex-col gap-1">
-        {navItems.map(({ id, label, icon: Icon }) => (
-          <button
-            key={id}
-            onClick={() => setActiveSection(id)}
-            className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer text-left w-full ${
-              activeSection === id
-                ? "bg-[#3b82f6]/10 text-[#3b82f6]"
-                : "text-gray-400 hover:text-white hover:bg-white/5"
-            }`}
-          >
-            <Icon className="text-lg xshrink-0" />
-            {label}
-          </button>
-        ))}
-      </nav>
+      {/* ── Mobile drawer overlay ── */}
+      {mobileOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/60 z-50 backdrop-blur-sm"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
 
-    </aside>
+      {/* ── Mobile drawer ── */}
+      <div className={`md:hidden fixed top-0 left-0 h-screen w-72 bg-[#111111] border-r border-white/5 z-50 flex flex-col p-6 transition-transform duration-300 ${
+        mobileOpen ? "translate-x-0" : "-translate-x-full"
+      }`}>
+
+        {/* Drawer header */}
+        <div className="flex items-center justify-between mb-10">
+          <div
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <img src={Logo} alt="DevIntel" className="w-7 h-7" />
+            <span className="text-white font-semibold text-lg">DevIntel</span>
+          </div>
+          <button
+            onClick={() => setMobileOpen(false)}
+            className="text-gray-400 hover:text-white transition"
+          >
+            <MdClose className="text-xl" />
+          </button>
+        </div>
+
+        {/* Drawer nav */}
+        <nav className="flex flex-col gap-1">
+          {navItems.map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              onClick={() => handleNavClick(id)}
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all cursor-pointer text-left w-full ${
+                activeSection === id
+                  ? "bg-[#3b82f6]/10 text-[#3b82f6]"
+                  : "text-gray-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <Icon className="text-lg shrink-0" />
+              {label}
+            </button>
+          ))}
+        </nav>
+
+      </div>
+    </>
   )
 }
 
