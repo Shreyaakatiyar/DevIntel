@@ -57,7 +57,6 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
 
 {
   "analysis": "2-3 sentences comparing both developers, mentioning their usernames with @ symbol",
-  "confidence": number between 85 and 99,
   "recommendation": "one sentence on who to hire for what"
 }`
 
@@ -216,12 +215,6 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
                   ) : null}
                 </div>
               </div>
-              {aiAnalysis && (
-                <div className="bg-[#3b82f6]/10 border border-[#3b82f6]/20 rounded-lg px-3 py-2 text-center ml-4 flex-shrink-0">
-                  <p className="text-xs text-gray-400 mb-0.5">Confidence</p>
-                  <p className="text-[#3b82f6] font-bold text-sm">{aiAnalysis.confidence}%</p>
-                </div>
-              )}
             </div>
           </div>
 
