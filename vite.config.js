@@ -6,15 +6,18 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  resolve: {
-    alias: {
-      'react-is': 'react-is',
+  build: {
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      external: ['recharts'],
+      output: {
+        globals: {
+          recharts: 'Recharts'
+        }
+      }
     }
   },
   optimizeDeps: {
-    include: [
-      'recharts',
-      'react-is',
-    ]
+    exclude: ['recharts']
   }
 })
