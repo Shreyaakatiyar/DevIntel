@@ -5,7 +5,7 @@ import { MdOutlineCompare, MdClose } from "react-icons/md"
 import { HiMenuAlt2 } from "react-icons/hi"
 import { IoSearch } from "react-icons/io5"
 import { useNavigate } from 'react-router-dom'
-import Logo from "../assets/logo.svg"
+import Logo from "../assets/Logo.svg"
 
 const navItems = [
   { id: "dashboard", label: "Dashboard", icon: RiDashboardLine },
