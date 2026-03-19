@@ -14,7 +14,7 @@ const TopNavbar = ({ showMobileSearch, onCloseMobileSearch }) => {
   }
 
   return (
-    <div className="relative z-10">
+    <div className="relative" style={{ zIndex: 9999 }}>
       {/* Desktop top bar */}
       <header className="hidden lg:flex items-center px-8 h-16 bg-[#1b1b1b]/50 backdrop-blur-md border-b border-[#1e1e1e]">
         <div className="flex items-center ml-auto w-full max-w-sm">
@@ -48,7 +48,9 @@ const TopNavbar = ({ showMobileSearch, onCloseMobileSearch }) => {
           />
 
           {/* Search dropdown */}
-          <div className="lg:hidden absolute top-0 left-0 right-0 px-4 py-3 bg-[#111111] border-b border-white/5 shadow-xl z-40">
+          <div className="lg:hidden absolute top-0 left-0 right-0 px-4 py-3 bg-[#111111] border-b border-white/5 shadow-xl"
+          style={{ zIndex: 99999 }}
+          >
             <div className="relative w-full">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                 <IoSearch />

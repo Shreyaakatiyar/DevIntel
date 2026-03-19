@@ -14,7 +14,7 @@ const Searchbar = () => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-4 md:px-0">
+    <div className="w-full max-w-2xl mx-auto px-4 md:px-0 ">
 
       {/* Desktop version — all in one row */}
       <div className="hidden sm:flex items-center bg-[#0f0f13] border border-white/10 rounded-xl px-4 py-4 shadow-lg">
@@ -36,7 +36,7 @@ const Searchbar = () => {
       </div>
 
       {/* Mobile version — stacked */}
-      <div className="flex sm:hidden flex-col gap-3">
+      <div className="flex sm:hidden flex-col gap-3 ">
         <div className="flex items-center bg-[#0f0f13] border border-white/10 rounded-xl px-4 py-3 shadow-lg">
           <IoSearch className="text-gray-400 text-lg shrink-0" />
           <input
