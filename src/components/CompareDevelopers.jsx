@@ -6,7 +6,10 @@ import { MdPeopleAlt } from 'react-icons/md'
 import { FaCodeFork, FaLocationDot } from 'react-icons/fa6'
 import { FiExternalLink } from 'react-icons/fi'
 import { BsStars } from 'react-icons/bs'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from "chart.js";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const cache = {};
 
@@ -135,18 +138,25 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
 
   return (
     <div className="flex flex-col p-8 gap-6">
-
       {/* Header */}
       <div>
-        <p className="text-xs text-[#3b82f6]/80 uppercase tracking-widest mb-1">Benchmarking Engine</p>
-        <h2 className="text-2xl font-bold text-white mb-1">Compare GitHub Developers</h2>
-        <p className="text-gray-400 text-sm">Cross-reference talent engineering metrics and repository velocity.</p>
+        <p className="text-xs text-[#3b82f6]/80 uppercase tracking-widest mb-1">
+          Benchmarking Engine
+        </p>
+        <h2 className="text-2xl font-bold text-white mb-1">
+          Compare GitHub Developers
+        </h2>
+        <p className="text-gray-400 text-sm">
+          Cross-reference talent engineering metrics and repository velocity.
+        </p>
       </div>
 
       {/* Search bar */}
       <div className="flex gap-3 items-center">
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">@</span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+            @
+          </span>
           <input
             value={profile.login}
             readOnly
@@ -157,11 +167,13 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
         <span className="text-gray-500 text-sm font-medium">VS</span>
 
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">@</span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+            @
+          </span>
           <input
             value={compareUsername}
-            onChange={e => setCompareUsername(e.target.value)}
-            onKeyDown={e => e.key === "Enter" && handleCompare()}
+            onChange={(e) => setCompareUsername(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleCompare()}
             placeholder="username"
             className="bg-[#202020] border border-white/10 rounded-xl py-2.5 pl-8 pr-4 text-sm text-white w-44 focus:outline-none focus:border-[#3b82f6]/40 placeholder-gray-500"
           />
@@ -185,8 +197,12 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
             <div className="w-16 h-16 rounded-full bg-[#3b82f6]/10 flex items-center justify-center mx-auto mb-4">
               <IoSearch className="text-[#3b82f6] text-2xl" />
             </div>
-            <p className="text-white font-semibold mb-2">Search a developer to compare</p>
-            <p className="text-gray-500 text-sm">Enter a GitHub username above to start benchmarking</p>
+            <p className="text-white font-semibold mb-2">
+              Search a developer to compare
+            </p>
+            <p className="text-gray-500 text-sm">
+              Enter a GitHub username above to start benchmarking
+            </p>
           </div>
         </div>
       )}
@@ -201,7 +217,9 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
                   <BsStars className="text-[#3b82f6]" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-white font-semibold text-sm mb-2">AI Talent Analysis</p>
+                  <p className="text-white font-semibold text-sm mb-2">
+                    AI Talent Analysis
+                  </p>
                   {aiLoading ? (
                     <div className="space-y-2 animate-pulse">
                       <div className="h-3 bg-[#2a2a2a] rounded w-full"></div>
@@ -209,8 +227,12 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
                     </div>
                   ) : aiAnalysis ? (
                     <>
-                      <p className="text-gray-400 text-xs leading-relaxed mb-1">{aiAnalysis.analysis}</p>
-                      <p className="text-gray-500 text-xs">{aiAnalysis.recommendation}</p>
+                      <p className="text-gray-400 text-xs leading-relaxed mb-1">
+                        {aiAnalysis.analysis}
+                      </p>
+                      <p className="text-gray-500 text-xs">
+                        {aiAnalysis.recommendation}
+                      </p>
                     </>
                   ) : null}
                 </div>
@@ -222,17 +244,40 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
           <div className="grid grid-cols-2 gap-4">
             {[
               { p: profile, r: repos, stars: totalStars1, forks: totalForks1 },
-              { p: compareProfile, r: compareRepos, stars: totalStars2, forks: totalForks2 }
+              {
+                p: compareProfile,
+                r: compareRepos,
+                stars: totalStars2,
+                forks: totalForks2,
+              },
             ].map(({ p, stars, forks }) => (
-              <div key={p.login} className="bg-[#1b1b1b] border border-white/5 rounded-xl p-6">
+              <div
+                key={p.login}
+                className="bg-[#1b1b1b] border border-white/5 rounded-xl p-6"
+              >
                 <div className="flex items-center gap-4 mb-4">
-                  <img src={p.avatar_url} className="w-12 h-12 rounded-xl" alt={p.login} />
+                  <img
+                    src={p.avatar_url}
+                    className="w-12 h-12 rounded-xl"
+                    alt={p.login}
+                  />
                   <div className="flex-1">
-                    <p className="text-white font-semibold">{p.name || p.login}</p>
+                    <p className="text-white font-semibold">
+                      {p.name || p.login}
+                    </p>
                     <p className="text-[#3b82f6] text-xs">@{p.login}</p>
-                    {p.bio && <p className="text-gray-400 text-xs mt-1 line-clamp-2">{p.bio}</p>}
+                    {p.bio && (
+                      <p className="text-gray-400 text-xs mt-1 line-clamp-2">
+                        {p.bio}
+                      </p>
+                    )}
                   </div>
-                  <a href={p.html_url} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition">
+                  <a
+                    href={p.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 hover:text-white transition"
+                  >
                     <FiExternalLink />
                   </a>
                 </div>
@@ -242,8 +287,12 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
                   </div>
                 )}
                 <div className="flex items-center gap-4 text-xs text-gray-400">
-                  <span className="flex items-center gap-1"><MdPeopleAlt /> {p.followers.toLocaleString()} followers</span>
-                  <span className="flex items-center gap-1"><RiGitRepositoryFill /> {p.public_repos} repos</span>
+                  <span className="flex items-center gap-1">
+                    <MdPeopleAlt /> {p.followers.toLocaleString()} followers
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <RiGitRepositoryFill /> {p.public_repos} repos
+                  </span>
                 </div>
               </div>
             ))}
@@ -252,31 +301,64 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
           {/* Stats comparison */}
           <div className="grid grid-cols-4 gap-4">
             {[
-              { label: "Followers", icon: <MdPeopleAlt />, v1: profile.followers, v2: compareProfile.followers },
-              { label: "Repositories", icon: <RiGitRepositoryFill />, v1: profile.public_repos, v2: compareProfile.public_repos },
-              { label: "Total Stars", icon: <RiStarSFill />, v1: totalStars1, v2: totalStars2 },
-              { label: "Total Forks", icon: <FaCodeFork />, v1: totalForks1, v2: totalForks2 },
+              {
+                label: "Followers",
+                icon: <MdPeopleAlt />,
+                v1: profile.followers,
+                v2: compareProfile.followers,
+              },
+              {
+                label: "Repositories",
+                icon: <RiGitRepositoryFill />,
+                v1: profile.public_repos,
+                v2: compareProfile.public_repos,
+              },
+              {
+                label: "Total Stars",
+                icon: <RiStarSFill />,
+                v1: totalStars1,
+                v2: totalStars2,
+              },
+              {
+                label: "Total Forks",
+                icon: <FaCodeFork />,
+                v1: totalForks1,
+                v2: totalForks2,
+              },
             ].map(({ label, icon, v1, v2 }) => (
-              <div key={label} className="bg-[#1b1b1b] border border-white/5 rounded-xl p-5">
+              <div
+                key={label}
+                className="bg-[#1b1b1b] border border-white/5 rounded-xl p-5"
+              >
                 <div className="flex items-center justify-between text-gray-500 text-xs mb-3">
                   <span className="uppercase tracking-widest">{label}</span>
                   {icon}
                 </div>
                 <div className="flex items-end justify-between">
                   <div>
-                    <p className="text-white font-bold text-xl">{v1.toLocaleString()}</p>
+                    <p className="text-white font-bold text-xl">
+                      {v1.toLocaleString()}
+                    </p>
                     <p className="text-gray-500 text-xs">@{profile.login}</p>
                   </div>
                   <div className="text-right">
-                    <p className={`font-bold text-xl ${v2 > v1 ? "text-[#3b82f6]" : "text-white"}`}>{v2.toLocaleString()}</p>
-                    <p className="text-gray-500 text-xs">@{compareProfile.login}</p>
+                    <p
+                      className={`font-bold text-xl ${v2 > v1 ? "text-[#3b82f6]" : "text-white"}`}
+                    >
+                      {v2.toLocaleString()}
+                    </p>
+                    <p className="text-gray-500 text-xs">
+                      @{compareProfile.login}
+                    </p>
                   </div>
                 </div>
                 {/* Mini comparison bar */}
                 <div className="mt-3 h-1.5 bg-[#2a2a2a] rounded-full overflow-hidden">
                   <div
                     className="h-full bg-[#3b82f6] rounded-full"
-                    style={{ width: `${Math.round((v1 / (v1 + v2 || 1)) * 100)}%` }}
+                    style={{
+                      width: `${Math.round((v1 / (v1 + v2 || 1)) * 100)}%`,
+                    }}
                   />
                 </div>
               </div>
@@ -285,14 +367,18 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
 
           {/* Languages + Growth Velocity */}
           <div className="grid grid-cols-2 gap-4">
-
             {/* Programming Languages */}
             <div className="bg-[#1b1b1b] border border-white/5 rounded-xl p-6">
-              <p className="text-white font-semibold text-sm mb-5">Programming Languages</p>
+              <p className="text-white font-semibold text-sm mb-5">
+                Programming Languages
+              </p>
               <div className="space-y-4">
                 {[
                   { username: profile.login, langs: getLanguageData(repos) },
-                  { username: compareProfile.login, langs: getLanguageData(compareRepos) }
+                  {
+                    username: compareProfile.login,
+                    langs: getLanguageData(compareRepos),
+                  },
                 ].map(({ username, langs }) => (
                   <div key={username}>
                     <p className="text-gray-400 text-xs mb-2">@{username}</p>
@@ -300,15 +386,24 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
                       {langs.map((l, i) => (
                         <div
                           key={l.lang}
-                          style={{ width: `${l.pct}%`, backgroundColor: langColors[i] }}
+                          style={{
+                            width: `${l.pct}%`,
+                            backgroundColor: langColors[i],
+                          }}
                           title={`${l.lang} ${l.pct}%`}
                         />
                       ))}
                     </div>
                     <div className="flex gap-3 mt-2 flex-wrap">
                       {langs.map((l, i) => (
-                        <span key={l.lang} className="flex items-center gap-1 text-xs text-gray-400">
-                          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: langColors[i] }}></span>
+                        <span
+                          key={l.lang}
+                          className="flex items-center gap-1 text-xs text-gray-400"
+                        >
+                          <span
+                            className="w-2 h-2 rounded-full"
+                            style={{ backgroundColor: langColors[i] }}
+                          ></span>
                           {l.lang}
                         </span>
                       ))}
@@ -318,17 +413,29 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
               </div>
               <div className="grid grid-cols-2 gap-4 mt-5 pt-5 border-t border-white/5">
                 <div>
-                  <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Avg Stars/Repo</p>
+                  <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">
+                    Avg Stars/Repo
+                  </p>
                   <div className="flex gap-4">
-                    <p className="text-white font-bold">{avgStars1.toLocaleString()}</p>
-                    <p className="text-[#3b82f6] font-bold">{avgStars2.toLocaleString()}</p>
+                    <p className="text-white font-bold">
+                      {avgStars1.toLocaleString()}
+                    </p>
+                    <p className="text-[#3b82f6] font-bold">
+                      {avgStars2.toLocaleString()}
+                    </p>
                   </div>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Avg Forks/Repo</p>
+                  <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">
+                    Avg Forks/Repo
+                  </p>
                   <div className="flex gap-4">
-                    <p className="text-white font-bold">{avgForks1.toLocaleString()}</p>
-                    <p className="text-[#3b82f6] font-bold">{avgForks2.toLocaleString()}</p>
+                    <p className="text-white font-bold">
+                      {avgForks1.toLocaleString()}
+                    </p>
+                    <p className="text-[#3b82f6] font-bold">
+                      {avgForks2.toLocaleString()}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -337,59 +444,120 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
             {/* Growth Velocity */}
             <div className="bg-[#1b1b1b] border border-white/5 rounded-xl p-6">
               <div className="flex items-center justify-between mb-5">
-                <p className="text-white font-semibold text-sm">Growth Velocity</p>
+                <p className="text-white font-semibold text-sm">
+                  Growth Velocity
+                </p>
                 <div className="flex items-center gap-3 text-xs">
                   <span className="flex items-center gap-1 text-gray-400">
-                    <span className="w-2 h-2 rounded-full bg-[#3b82f6]"></span> @{profile.login}
+                    <span className="w-2 h-2 rounded-full bg-[#3b82f6]"></span>{" "}
+                    @{profile.login}
                   </span>
                   <span className="flex items-center gap-1 text-gray-400">
-                    <span className="w-2 h-2 rounded-full bg-[#6366f1]"></span> @{compareProfile.login}
+                    <span className="w-2 h-2 rounded-full bg-[#6366f1]"></span>{" "}
+                    @{compareProfile.login}
                   </span>
                 </div>
               </div>
-              <ResponsiveContainer width="100%" height={160}>
-                <BarChart data={growthData} barSize={10} barGap={2}>
-                  <XAxis dataKey="year" tick={{ fill: "#6b7280", fontSize: 10 }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fill: "#6b7280", fontSize: 10 }} axisLine={false} tickLine={false} />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: "#1b1b1b", border: "1px solid rgba(59,130,246,0.2)", borderRadius: "8px", color: "#fff", fontSize: "11px" }}
-                    cursor={{ fill: "rgba(255,255,255,0.03)" }}
-                  />
-                  <Bar dataKey={profile.login} fill="#3b82f6" radius={[3, 3, 0, 0]} />
-                  <Bar dataKey={compareProfile.login} fill="#6366f1" radius={[3, 3, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
+              <Bar
+                data={{
+                  labels: growthData.map((d) => d.year),
+                  datasets: [
+                    {
+                      label: profile.login,
+                      data: growthData.map((d) => d[profile.login] || 0),
+                      backgroundColor: "rgba(59,130,246,0.85)",
+                      borderRadius: 4,
+                      borderSkipped: false,
+                    },
+                    {
+                      label: compareProfile.login,
+                      data: growthData.map((d) => d[compareProfile.login] || 0),
+                      backgroundColor: "rgba(99,102,241,0.85)",
+                      borderRadius: 4,
+                      borderSkipped: false,
+                    },
+                  ],
+                }}
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: {
+                      labels: {
+                        color: "#9ca3af",
+                        font: { size: 11 },
+                        boxWidth: 12,
+                      },
+                    },
+                    tooltip: {
+                      backgroundColor: "#1b1b1b",
+                      borderColor: "rgba(59,130,246,0.2)",
+                      borderWidth: 1,
+                      titleColor: "#fff",
+                      bodyColor: "#9ca3af",
+                    },
+                  },
+                  scales: {
+                    x: {
+                      grid: { display: false },
+                      ticks: { color: "#6b7280", font: { size: 10 } },
+                      border: { display: false },
+                    },
+                    y: {
+                      grid: { color: "rgba(255,255,255,0.03)" },
+                      ticks: { color: "#6b7280", font: { size: 10 } },
+                      border: { display: false },
+                    },
+                  },
+                }}
+                height={100}
+              />
             </div>
           </div>
 
           {/* Flagship Repositories */}
           <div className="bg-[#1b1b1b] border border-white/5 rounded-xl p-6">
-            <p className="text-white font-semibold text-sm mb-5">Flagship Repositories</p>
+            <p className="text-white font-semibold text-sm mb-5">
+              Flagship Repositories
+            </p>
             <div className="grid grid-cols-2 gap-6">
               {[
                 { username: profile.login, repoList: topRepos1 },
-                { username: compareProfile.login, repoList: topRepos2 }
+                { username: compareProfile.login, repoList: topRepos2 },
               ].map(({ username, repoList }) => (
                 <div key={username}>
-                  <p className="text-gray-400 text-xs mb-3">@{username} Top Projects</p>
+                  <p className="text-gray-400 text-xs mb-3">
+                    @{username} Top Projects
+                  </p>
                   <div className="space-y-3">
-                    {repoList.map(repo => (
-                      <div key={repo.id} className="flex items-center justify-between p-3 bg-[#252525] rounded-lg hover:bg-[#2a2a2a] transition group">
+                    {repoList.map((repo) => (
+                      <div
+                        key={repo.id}
+                        className="flex items-center justify-between p-3 bg-[#252525] rounded-lg hover:bg-[#2a2a2a] transition group"
+                      >
                         <div className="flex-1 min-w-0">
-                          <a href={repo.html_url} target="_blank" rel="noopener noreferrer"
-                            className="text-white text-xs font-medium group-hover:text-[#3b82f6] transition truncate block">
+                          <a
+                            href={repo.html_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-white text-xs font-medium group-hover:text-[#3b82f6] transition truncate block"
+                          >
                             {repo.name}
                           </a>
                           {repo.description && (
-                            <p className="text-gray-500 text-xs truncate mt-0.5">{repo.description}</p>
+                            <p className="text-gray-500 text-xs truncate mt-0.5">
+                              {repo.description}
+                            </p>
                           )}
                         </div>
                         <div className="flex items-center gap-3 ml-3 shrink-0">
                           {repo.language && (
-                            <span className="text-xs text-gray-500 bg-white/5 px-2 py-0.5 rounded">{repo.language}</span>
+                            <span className="text-xs text-gray-500 bg-white/5 px-2 py-0.5 rounded">
+                              {repo.language}
+                            </span>
                           )}
                           <span className="flex items-center gap-1 text-xs text-gray-400">
-                            <RiStarSFill className="text-yellow-400" />{repo.stargazers_count.toLocaleString()}
+                            <RiStarSFill className="text-yellow-400" />
+                            {repo.stargazers_count.toLocaleString()}
                           </span>
                         </div>
                       </div>
@@ -399,11 +567,10 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
               ))}
             </div>
           </div>
-
         </>
       )}
     </div>
-  )
+  );
 }
 
 export default CompareSection

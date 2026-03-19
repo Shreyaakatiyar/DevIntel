@@ -1,7 +1,15 @@
 import CalendarHeatmap from "react-calendar-heatmap";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Tooltip,
+} from "chart.js";
 
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
 
 const ContributionHeatmap = ({ heatmapData, contributions, selectedYear, setSelectedYear, repos, profile }) => {
   const currentYear = new Date().getFullYear();
@@ -144,37 +152,42 @@ const ContributionHeatmap = ({ heatmapData, contributions, selectedYear, setSele
         <p className="text-sm font-medium text-gray-300 mb-4">
           Monthly Activity
         </p>
-        <ResponsiveContainer width="100%" height={110}>
-          <BarChart
-            data={monthlyData}
-            barSize={20}
-            style={{ background: "transparent" }}
-          >
-            <XAxis
-              dataKey="month"
-              tick={{ fill: "#6b7280", fontSize: 11 }}
-              axisLine={false}
-              tickLine={false}
-            />
-            <Tooltip
-              contentStyle={{
+        <Bar
+          data={{
+            labels: monthlyData.map((d) => d.month),
+            datasets: [
+              {
+                data: monthlyData.map((d) => d.contributions),
+                backgroundColor: "rgba(59,130,246,0.85)",
+                borderRadius: 4,
+                borderSkipped: false,
+              },
+            ],
+          }}
+          options={{
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
                 backgroundColor: "#1b1b1b",
-                border: "1px solid rgba(59,130,246,0.2)",
-                borderRadius: "8px",
-                color: "#fff",
-                fontSize: "12px",
-              }}
-              cursor={{ fill: "rgba(255,255,255,0.03)" }}
-              formatter={(value) => [value, "contributions"]}
-            />
-            <Bar
-              dataKey="contributions"
-              fill="#3b82f6"
-              radius={[4, 4, 0, 0]}
-              opacity={0.85}
-            />
-          </BarChart>
-        </ResponsiveContainer>
+                borderColor: "rgba(59,130,246,0.2)",
+                borderWidth: 1,
+                titleColor: "#fff",
+                bodyColor: "#9ca3af",
+                callbacks: { label: (ctx) => `${ctx.parsed.y} contributions` },
+              },
+            },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: { color: "#6b7280", font: { size: 11 } },
+                border: { display: false },
+              },
+              y: { display: false },
+            },
+          }}
+          height={80}
+        />
       </div>
     </div>
   );

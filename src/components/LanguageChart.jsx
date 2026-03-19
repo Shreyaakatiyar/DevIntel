@@ -80,7 +80,7 @@ const LanguageChart = ({ repos }) => {
           <div key={index} className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span
-                className="w-3 h-3 rounded-full flex-shrink-0"
+                className="w-3 h-3 rounded-full shrink-0"
                 style={{ backgroundColor: lang.color }}
               />
               <span className="text-gray-300 text-sm">{lang.name}</span>
