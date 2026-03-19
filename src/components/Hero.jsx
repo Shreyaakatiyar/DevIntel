@@ -18,7 +18,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#3b82f6]/20 bg-[#3b82f6]/5 text-[#3b82f6] text-xs font-medium mt-16 sm:mt-0"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#3b82f6]/20 bg-[#3b82f6]/5 text-[#3b82f6] text-xs font-medium mt-10 sm:mt-0"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] animate-pulse"></span>
           GitHub Developer Analysis
