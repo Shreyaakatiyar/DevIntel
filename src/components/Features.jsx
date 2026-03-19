@@ -40,8 +40,8 @@ const Features = () => {
               Get deep technical analysis beyond the stars. Our neural engine parses commit messages, PR quality, and architectural patterns to score engineering maturity.
             </p>
             <div className='flex gap-2 mt-6'>
-              <span className='px-3 py-1 bg-[#2d2d2d] border border-default text-secondary text-xs rounded-full'>Semantic Analysis</span>
-              <span className='px-3 py-1 bg-[#2d2d2d] border border-default text-secondary text-xs rounded-full'>Code Quality Score</span>
+              <span className='px-3 py-1 bg-[#2d2d2d] border border-default text-secondary text-xs rounded-full text-center'>Semantic Analysis</span>
+              <span className='px-3 py-1 bg-[#2d2d2d] border border-default text-secondary text-xs rounded-full text-center'>Code Quality Score</span>
             </div>
           </div>
         </motion.div>
