@@ -131,21 +131,40 @@ const Dashboard = () => {
     if (error) {
       return (
         <div className="flex min-h-screen">
-          <SideNavbar />
+          <SideNavbar
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            onSearchOpen={() => setMobileSearchOpen(true)}
+          />
           <main className="lg:ml-64 flex-1 flex flex-col">
-            {/* Spacer for mobile top bar */}
-            <div className="block md:hidden h-14" />
-            <TopNavbar />
-            <div className="flex flex-col items-center justify-center flex-1 gap-6 p-10">
-              <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center">
-                <svg className="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            <div className="block lg:hidden h-14" />
+            <TopNavbar
+              showMobileSearch={mobileSearchOpen}
+              onCloseMobileSearch={() => setMobileSearchOpen(false)}
+            />
+            <div className="flex flex-col items-center justify-center flex-1 gap-6 p-6 md:p-10">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-red-500/10 flex items-center justify-center">
+                <svg
+                  className="w-6 h-6 md:w-8 md:h-8 text-red-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                  />
                 </svg>
               </div>
-              <div className="text-center">
-                <h2 className="text-xl font-semibold text-white mb-2">Analysis Failed</h2>
-                <p className="text-gray-400 text-sm max-w-sm">{error}</p>
+              <div className="text-center px-4">
+                <h2 className="text-lg md:text-xl font-semibold text-white mb-2">
+                  Analysis Failed
+                </h2>
+                <p className="text-gray-400 text-sm max-w-xs md:max-w-sm">
+                  {error}
+                </p>
               </div>
               <button
                 onClick={() => window.history.back()}
@@ -163,37 +182,53 @@ const Dashboard = () => {
     if (!profile) {
       return (
         <div className="flex min-h-screen">
-          <SideNavbar />
-          <main className="ml-64 flex-1 flex flex-col">
-            <TopNavbar />
-            <div className="flex flex-col items-center justify-center flex-1 gap-8 p-10">
-
-              {/* Animated logo / spinner */}
-              <div className="relative w-20 h-20">
+          <SideNavbar
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            onSearchOpen={() => setMobileSearchOpen(true)}
+          />
+          <main className="lg:ml-64 flex-1 flex flex-col">
+            <div className="block lg:hidden h-14" />
+            <TopNavbar
+              showMobileSearch={mobileSearchOpen}
+              onCloseMobileSearch={() => setMobileSearchOpen(false)}
+            />
+            <div className="flex flex-col items-center justify-center flex-1 gap-6 md:gap-8 p-6 md:p-10">
+              {/* Spinner */}
+              <div className="relative w-16 h-16 md:w-20 md:h-20">
                 <div className="absolute inset-0 rounded-full border-2 border-[#3b82f6]/20"></div>
                 <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-[#3b82f6] animate-spin"></div>
-                <div className="absolute inset-3 rounded-full border-2 border-transparent border-t-[#3b82f6]/50 animate-spin" style={{ animationDuration: "1.5s" }}></div>
+                <div
+                  className="absolute inset-3 rounded-full border-2 border-transparent border-t-[#3b82f6]/50 animate-spin"
+                  style={{ animationDuration: "1.5s" }}
+                ></div>
               </div>
 
               {/* Text */}
-              <div className="text-center">
-                <h2 className="text-xl font-semibold text-white mb-2">
+              <div className="text-center px-4">
+                <h2 className="text-lg md:text-xl font-semibold text-white mb-2">
                   Analyzing <span className="text-[#3b82f6]">@{username}</span>
                 </h2>
-                <p className="text-gray-500 text-sm">Fetching profile, repositories and insights...</p>
+                <p className="text-gray-500 text-xs md:text-sm">
+                  Fetching profile, repositories and insights...
+                </p>
               </div>
 
               {/* Skeleton cards */}
-              <div className="w-full max-w-3xl grid grid-cols-3 gap-4">
+              <div className="w-full max-w-xs sm:max-w-md md:max-w-3xl grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                 {[...Array(3)].map((_, i) => (
-                  <div key={i} className="bg-[#202020] rounded-xl p-5 animate-pulse">
-                    <div className="w-10 h-10 bg-[#2a2a2a] rounded-lg mb-4"></div>
-                    <div className="h-3 bg-[#2a2a2a] rounded w-2/3 mb-3"></div>
-                    <div className="h-6 bg-[#2a2a2a] rounded w-1/2"></div>
+                  <div
+                    key={i}
+                    className={`bg-[#202020] rounded-xl p-4 md:p-5 animate-pulse ${
+                      i === 2 ? "hidden md:block" : ""
+                    }`}
+                  >
+                    <div className="w-8 h-8 md:w-10 md:h-10 bg-[#2a2a2a] rounded-lg mb-3 md:mb-4"></div>
+                    <div className="h-2.5 bg-[#2a2a2a] rounded w-2/3 mb-2 md:mb-3"></div>
+                    <div className="h-5 bg-[#2a2a2a] rounded w-1/2"></div>
                   </div>
                 ))}
               </div>
-
             </div>
           </main>
         </div>
