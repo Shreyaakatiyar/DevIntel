@@ -98,17 +98,9 @@ const Dashboard = () => {
           return <RepoExplorer repos={repos} />;
         case "insights":
           return (
-            <div className="p-8">
-              <h2 className="text-2xl font-bold text-white mb-2">
-                AI Insights
-              </h2>
-              <p className="text-gray-400 text-sm mb-8">
-                AI-generated analysis of @{profile.login}'s GitHub activity, technology stack, and repository trends.
-              </p>
               <div>
                 <InsightsDashboard profile={profile} repos={repos} />
               </div>
-            </div>
           );
         case "compare":
           return <CompareDevelopers profile={profile} repos={repos} />;

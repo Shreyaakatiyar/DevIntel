@@ -118,194 +118,183 @@ Return ONLY valid JSON, no markdown, no extra text:
   };
 
   return (
-    <div className="flex flex-col flex-1 p-4 md:p-6 gap-4 md:gap-6 min-h-full">
+  <div className="flex flex-col p-4 md:p-8 gap-4 md:gap-6">
 
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        {data && !loading && (
-          <button
-            onClick={() => { delete cache[profile.login]; generateInsights(true); }}
-            disabled={loading}
-            className="flex items-center gap-2 px-3 md:px-4 py-2 bg-white/5 text-gray-300 rounded-lg text-xs md:text-sm hover:bg-white/10 transition cursor-pointer disabled:opacity-40 shrink-0"
-          >
-            <RiRefreshLine className={loading ? "animate-spin" : ""} />
-            <span className="hidden sm:inline">Refresh AI</span>
-          </button>
-        )}
+    {/* Header — always visible, properly aligned */}
+    <div className="flex items-start justify-between">
+      <div>
+        <div className="flex items-center gap-2 mb-1">
+          <BsStars className="text-[#3b82f6] shrink-0" />
+          <h2 className="text-lg md:text-2xl font-bold text-white">AI Insights</h2>
+        </div>
+        <p className="text-gray-400 text-xs md:text-sm">
+          AI-generated analysis of @{profile.login}'s GitHub activity, technology stack, and repository trends.
+        </p>
       </div>
+      {data && !loading && (
+        <button
+          onClick={() => { delete cache[profile.login]; generateInsights(true); }}
+          disabled={loading}
+          className="flex items-center gap-2 px-3 md:px-4 py-2 bg-white/5 text-gray-300 rounded-lg text-xs md:text-sm hover:bg-white/10 transition cursor-pointer disabled:opacity-40 shrink-0 ml-4"
+        >
+          <RiRefreshLine className={loading ? "animate-spin" : ""} />
+          <span className="hidden sm:inline">Refresh AI</span>
+        </button>
+      )}
+    </div>
 
-      {/* Initial state */}
-      {!data && !loading && !error && (
-        <div className="flex items-center justify-center min-h-[60vh]">
-          <div className="flex flex-col items-center gap-5 bg-[#1b1b1b] border border-white/5 rounded-xl p-8 md:p-16 w-full max-w-sm md:max-w-md mx-4">
-            <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#3b82f6]/10 flex items-center justify-center">
-              <BsStars className="text-[#3b82f6] text-xl md:text-2xl" />
-            </div>
-            <div className="text-center">
-              <p className="text-white font-semibold mb-2">Generate AI Analysis</p>
-              <p className="text-gray-400 text-xs md:text-sm">
-                Get a detailed breakdown of {profile.login}'s development style, strengths, and technical focus.
-              </p>
-            </div>
-            <button
-              onClick={() => generateInsights()}
-              className="px-6 py-2.5 bg-[#3b82f6] text-white rounded-lg text-sm font-medium hover:bg-blue-500 transition cursor-pointer w-full"
-            >
-              Analyze Profile
-            </button>
+    {/* Initial state */}
+    {!data && !loading && !error && (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="flex flex-col items-center gap-5 bg-[#1b1b1b] border border-white/5 rounded-xl p-8 md:p-12 w-full max-w-sm">
+          <div className="w-14 h-14 rounded-full bg-[#3b82f6]/10 flex items-center justify-center">
+            <BsStars className="text-[#3b82f6] text-xl" />
+          </div>
+          <div className="text-center">
+            <p className="text-white font-semibold mb-2">Generate AI Analysis</p>
+            <p className="text-gray-400 text-xs md:text-sm">
+              Get a detailed breakdown of {profile.login}'s development style, strengths, and technical focus.
+            </p>
+          </div>
+          <button
+            onClick={() => generateInsights()}
+            className="px-6 py-2.5 bg-[#3b82f6] text-white rounded-lg text-sm font-medium hover:bg-blue-500 transition cursor-pointer w-full"
+          >
+            Analyze Profile
+          </button>
+        </div>
+      </div>
+    )}
+
+    {/* Loading skeleton */}
+    {loading && (
+      <div className="flex flex-col gap-4 animate-pulse">
+        <div className="bg-[#1b1b1b] border border-white/5 rounded-xl p-5 md:p-8">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-28 md:w-32 h-5 bg-[#2a2a2a] rounded-full"></div>
+            <div className="w-20 h-4 bg-[#2a2a2a] rounded"></div>
+          </div>
+          <div className="h-5 md:h-7 bg-[#2a2a2a] rounded w-3/4 mb-4"></div>
+          <div className="space-y-2 mb-6">
+            <div className="h-3 bg-[#2a2a2a] rounded w-full"></div>
+            <div className="h-3 bg-[#2a2a2a] rounded w-5/6"></div>
+            <div className="h-3 bg-[#2a2a2a] rounded w-4/6"></div>
+          </div>
+          <div className="h-px bg-[#2a2a2a] w-full mb-5"></div>
+          <div className="flex gap-6 md:gap-12">
+            {[...Array(3)].map((_, i) => (
+              <div key={i}>
+                <div className="h-2.5 bg-[#2a2a2a] rounded w-16 mb-2"></div>
+                <div className="h-6 bg-[#2a2a2a] rounded w-12"></div>
+              </div>
+            ))}
           </div>
         </div>
-      )}
-
-      {/* Loading skeleton */}
-      {loading && (
-        <div className="flex flex-col gap-4 animate-pulse">
-
-          {/* Summary skeleton */}
-          <div className="bg-[#1b1b1b] border border-white/5 rounded-xl p-5 md:p-8">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-28 md:w-32 h-5 md:h-6 bg-[#2a2a2a] rounded-full"></div>
-              <div className="w-20 md:w-24 h-4 bg-[#2a2a2a] rounded"></div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="bg-[#1b1b1b] border border-white/5 rounded-xl p-4 md:p-5">
+              <div className="w-8 h-8 bg-[#2a2a2a] rounded-lg mb-3"></div>
+              <div className="h-2.5 bg-[#2a2a2a] rounded w-2/3 mb-2"></div>
+              <div className="h-4 bg-[#2a2a2a] rounded w-full mb-2"></div>
+              <div className="h-2.5 bg-[#2a2a2a] rounded w-3/4"></div>
             </div>
-            <div className="h-5 md:h-7 bg-[#2a2a2a] rounded w-3/4 md:w-2/3 mb-4 md:mb-5"></div>
-            <div className="space-y-2 md:space-y-3 mb-6 md:mb-8">
-              <div className="h-3 md:h-4 bg-[#2a2a2a] rounded w-full"></div>
-              <div className="h-3 md:h-4 bg-[#2a2a2a] rounded w-5/6"></div>
-              <div className="h-3 md:h-4 bg-[#2a2a2a] rounded w-4/6"></div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {/* Error */}
+    {error && !loading && (
+      <div className="p-5 rounded-xl bg-red-500/10 border border-red-500/20">
+        <p className="text-red-400 text-sm mb-3">{error}</p>
+        <button
+          onClick={() => generateInsights()}
+          className="px-4 py-2 bg-red-500/10 text-red-400 rounded-lg text-xs hover:bg-red-500/20 transition cursor-pointer"
+        >
+          Try again
+        </button>
+      </div>
+    )}
+
+    {/* Results */}
+    {data && !loading && (
+      <div className="flex flex-col gap-4">
+
+        {/* Executive summary card */}
+        <div className="bg-[#1b1b1b] border border-white/5 rounded-xl p-5 md:p-8 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-[#3b82f6]/5 blur-3xl rounded-full pointer-events-none"></div>
+          <div className="relative z-10">
+
+            <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6 flex-wrap">
+              <span className="px-2 md:px-3 py-1 bg-[#3b82f6]/10 text-[#3b82f6] text-[10px] md:text-xs font-semibold rounded-full uppercase tracking-widest">
+                Executive Summary
+              </span>
+              {lastUpdated && (
+                <span className="text-gray-500 text-xs">{formatTime(lastUpdated)}</span>
+              )}
             </div>
-            <div className="h-px bg-[#2a2a2a] w-full mb-5 md:mb-6"></div>
-            <div className="flex gap-6 md:gap-12">
-              {[...Array(3)].map((_, i) => (
+
+            <h3 className="text-base md:text-2xl font-bold text-white mb-3 md:mb-5 leading-tight">
+              Development Persona:{" "}
+              <span className="text-[#3b82f6]">{data.persona}</span>
+            </h3>
+
+            <p className="text-gray-300 text-xs md:text-sm leading-relaxed mb-2 md:mb-3">
+              {data.summary}
+            </p>
+            <p className="text-gray-400 text-xs md:text-sm leading-relaxed">
+              {data.recentTrend}
+            </p>
+
+            <div className="h-px bg-white/5 w-full my-4 md:my-6"></div>
+
+            <div className="flex items-start gap-6 md:gap-16 flex-wrap">
+              {[
+                { label: "Impact Score", value: <>{data.impactScore}<span className="text-gray-500 text-sm font-normal">/100</span></> },
+                { label: "Review Quality", value: data.reviewQuality },
+                { label: "Collaboration", value: data.collaboration },
+              ].map((item, i) => (
                 <div key={i}>
-                  <div className="h-2.5 md:h-3 bg-[#2a2a2a] rounded w-16 md:w-20 mb-2 md:mb-3"></div>
-                  <div className="h-6 md:h-7 bg-[#2a2a2a] rounded w-12 md:w-16"></div>
+                  <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mb-1 md:mb-2">
+                    {item.label}
+                  </p>
+                  <p className="text-xl md:text-3xl font-bold text-white">{item.value}</p>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* Cards skeleton */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="bg-[#1b1b1b] border border-white/5 rounded-xl p-4 md:p-5">
-                <div className="w-8 h-8 md:w-10 md:h-10 bg-[#2a2a2a] rounded-lg mb-3 md:mb-5"></div>
-                <div className="h-2.5 bg-[#2a2a2a] rounded w-2/3 mb-2 md:mb-3"></div>
-                <div className="h-4 md:h-5 bg-[#2a2a2a] rounded w-full mb-2 md:mb-3"></div>
-                <div className="h-2.5 bg-[#2a2a2a] rounded w-3/4"></div>
-              </div>
-            ))}
-          </div>
-
         </div>
-      )}
 
-      {/* Error */}
-      {error && !loading && (
-        <div className="p-5 md:p-6 rounded-xl bg-red-500/10 border border-red-500/20">
-          <p className="text-red-400 text-sm mb-3">{error}</p>
-          <button
-            onClick={() => generateInsights()}
-            className="px-4 py-2 bg-red-500/10 text-red-400 rounded-lg text-xs hover:bg-red-500/20 transition cursor-pointer"
-          >
-            Try again
-          </button>
-        </div>
-      )}
-
-      {/* Results */}
-      {data && !loading && (
-        <div className="flex flex-col gap-4">
-
-          {/* Executive summary card */}
-          <div className="bg-[#1b1b1b] border border-white/5 rounded-xl p-5 md:p-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-[#3b82f6]/5 blur-3xl rounded-full pointer-events-none"></div>
-
-            <div className="relative z-10">
-
-              {/* Badge + timestamp */}
-              <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6 flex-wrap">
-                <span className="px-2 md:px-3 py-1 bg-[#3b82f6]/10 text-[#3b82f6] text-[10px] md:text-xs font-semibold rounded-full uppercase tracking-widest">
-                  Executive Summary
-                </span>
-                {lastUpdated && (
-                  <span className="text-gray-500 text-xs">{formatTime(lastUpdated)}</span>
-                )}
+        {/* Insight cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {data.cards?.map((card, i) => (
+            <div
+              key={i}
+              className="bg-[#1b1b1b] border border-white/5 rounded-xl p-4 md:p-6 hover:border-[#3b82f6]/20 transition-all flex flex-col gap-3"
+            >
+              <div className="w-8 h-8 md:w-10 md:h-10 bg-[#3b82f6]/10 rounded-lg flex items-center justify-center shrink-0">
+                {iconMap[card.icon] || <BsStars className="text-[#3b82f6]" />}
               </div>
-
-              {/* Persona */}
-              <h3 className="text-lg md:text-2xl font-bold text-white mb-3 md:mb-5 leading-tight">
-                Development Persona:{" "}
-                <span className="text-[#3b82f6]">{data.persona}</span>
-              </h3>
-
-              {/* Summary */}
-              <p className="text-gray-300 text-xs md:text-sm leading-relaxed mb-2 md:mb-3">
-                {data.summary}
-              </p>
-              <p className="text-gray-400 text-xs md:text-sm leading-relaxed">
-                {data.recentTrend}
-              </p>
-
-              {/* Divider */}
-              <div className="h-px bg-white/5 w-full my-4 md:my-6"></div>
-
-              {/* Score row */}
-              <div className="flex items-start gap-6 md:gap-16 flex-wrap">
-                <div>
-                  <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mb-1 md:mb-2">
-                    Impact Score
-                  </p>
-                  <p className="text-2xl md:text-3xl font-bold text-white">
-                    {data.impactScore}
-                    <span className="text-gray-500 text-sm md:text-lg font-normal">/100</span>
-                  </p>
-                </div>
-                <div>
-                  <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mb-1 md:mb-2">
-                    Review Quality
-                  </p>
-                  <p className="text-2xl md:text-3xl font-bold text-white">{data.reviewQuality}</p>
-                </div>
-                <div>
-                  <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mb-1 md:mb-2">
-                    Collaboration
-                  </p>
-                  <p className="text-2xl md:text-3xl font-bold text-white">{data.collaboration}</p>
-                </div>
+              <div>
+                <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mb-1">
+                  {card.label}
+                </p>
+                <p className="text-white font-semibold text-xs md:text-sm mb-1">
+                  {card.value}
+                </p>
+                <p className="text-gray-500 text-[10px] md:text-xs leading-relaxed hidden sm:block">
+                  {card.detail}
+                </p>
               </div>
             </div>
-          </div>
-
-          {/* Insight cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {data.cards?.map((card, i) => (
-              <div
-                key={i}
-                className="bg-[#1b1b1b] border border-white/5 rounded-xl p-4 md:p-6 hover:border-[#3b82f6]/20 transition-all flex flex-col gap-3 md:gap-4"
-              >
-                <div className="w-8 h-8 md:w-10 md:h-10 bg-[#3b82f6]/10 rounded-lg flex items-center justify-center">
-                  {iconMap[card.icon] || <BsStars className="text-[#3b82f6]" />}
-                </div>
-                <div>
-                  <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mb-1">
-                    {card.label}
-                  </p>
-                  <p className="text-white font-semibold text-xs md:text-sm mb-1">
-                    {card.value}
-                  </p>
-                  <p className="text-gray-500 text-[10px] md:text-xs leading-relaxed hidden sm:block">
-                    {card.detail}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
+          ))}
         </div>
-      )}
 
-    </div>
-  );
+      </div>
+    )}
+
+  </div>
+)
 };
 
 export default InsightsDashboard;

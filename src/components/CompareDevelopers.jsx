@@ -244,11 +244,11 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
                 <div className="flex items-end justify-between">
                   <div>
                     <p className="text-white font-bold text-base md:text-xl">{v1.toLocaleString()}</p>
-                    <p className="text-gray-500 text-[10px] truncate max-w-[60px] md:max-w-none">@{profile.login}</p>
+                    <p className="text-gray-500 text-[10px] truncate max-w-15 md:max-w-none">@{profile.login}</p>
                   </div>
                   <div className="text-right">
                     <p className={`font-bold text-base md:text-xl ${v2 > v1 ? "text-[#3b82f6]" : "text-white"}`}>{v2.toLocaleString()}</p>
-                    <p className="text-gray-500 text-[10px] truncate max-w-[60px] md:max-w-none">@{compareProfile.login}</p>
+                    <p className="text-gray-500 text-[10px] truncate max-w-15 md:max-w-none">@{compareProfile.login}</p>
                   </div>
                 </div>
                 <div className="mt-2 md:mt-3 h-1.5 bg-[#2a2a2a] rounded-full overflow-hidden">
@@ -280,7 +280,7 @@ Developer 2: ${cp.login}, ${cp.followers} followers, ${cp.public_repos} repos, $
                       {langs.map((l, i) => (
                         <span key={l.lang} className="flex items-center gap-1 text-xs text-gray-400">
                           <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: langColors[i] }}></span>
-                          <span className="truncate max-w-[60px]">{l.lang}</span>
+                          <span className="truncate max-w-15">{l.lang}</span>
                         </span>
                       ))}
                     </div>

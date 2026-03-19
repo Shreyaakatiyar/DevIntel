@@ -83,7 +83,7 @@ const ContributionHeatmap = ({ heatmapData, contributions, selectedYear, setSele
           {/* Scrollable years */}
           <div
             ref={scrollRef}
-            className="flex gap-2 overflow-x-auto scrollbar-hide max-w-[200px] sm:max-w-xs"
+            className="flex gap-2 overflow-x-auto scrollbar-hide max-w-50 sm:max-w-xs"
           >
             {years.map((year) => (
               <button
