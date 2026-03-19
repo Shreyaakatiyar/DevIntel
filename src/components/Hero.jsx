@@ -29,7 +29,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter bg-gradient-to-b from-[#b7cef2] to-[#ededed] bg-clip-text text-transparent leading-tight"
+          className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter bg-linear-to-b from-[#b7cef2] to-[#ededed] bg-clip-text text-transparent leading-tight"
         >
           Decode Developer DNA
         </motion.h1>
